@@ -1,0 +1,22 @@
+<html>
+    <body>
+    <h1 style="color: blue;">
+    Esta es la plantilla con variable
+    </h1>
+    <p>El nombre del programador es: {{nombre_persona}} {{apellido_persona.upper}}</p>
+    <p>Hoy es: {{momento_actual.day}}/{{momento_actual.month}}/{{momento_actual.year}}</p>
+    <p>Tema actual: {{temas.2}}</p>
+    <p><strong>Temas del curso:</strong></p>
+    <p>
+        <ul>
+        {% if temas %}
+            {% for el_tema in temas %}
+                <li>{{el_tema}}</li>
+            {% endfor %}
+        {% else %}
+            <p>No hay elementos en la lista</p>
+        {% endif %}
+        </ul>
+    </p>
+    </body>
+    </html>
