@@ -3,6 +3,14 @@
     <h1 style="color: blue;">
     Esta es la plantilla con variable
     </h1>
+
+{# No es recomendable abusar de controles de flujo en las plantillas #}
+    {% if nombre_persona == 'Jaime' %}
+    <p>El programador que programa es el principal</p>
+    {% else %}
+    <p>El programador no es el principal</p>
+    {% endif %}
+
     <p>El nombre del programador es: {{nombre_persona}} {{apellido_persona.upper}}</p>
     <p>Hoy es: {{momento_actual.day}}/{{momento_actual.month}}/{{momento_actual.year}}</p>
     <p>Tema actual: {{temas.2}}</p>

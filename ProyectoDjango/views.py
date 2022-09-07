@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context
+from django.template.loader import get_template
 
 class Persona(object):
     def __init__(self, nombre, apellido):
@@ -44,7 +45,7 @@ def saludo_plantilla_base(request): # Ejemplo de plantilla
         documento=plt.render(ctx)
     """
 
-    doc_externo = open("C:/Users/jaime/OneDrive/Documentos/ProyectosDjango/ProyectoDjango/ProyectoDjango/plantillas/primera_plantilla.html")
+    doc_externo = open("C:/Users/jaime/Documents/ProyectoDjango/ProyectoDjango/templates/primera_plantilla.html")
 
     plt = Template(doc_externo.read())
 
@@ -56,7 +57,7 @@ def saludo_plantilla_base(request): # Ejemplo de plantilla
 
     return HttpResponse(respuesta)
 
-def saludo_plantilla_variable(request): # Ejemplo de plantilla con variable
+def saludo_plantilla_variable(request): # Ejemplo de plantilla con variable   
     """
     Jerarquía u orden de llamada desde una plantilla:
     Diccionario -> Atributo -> Método -> Índice de lista
@@ -66,14 +67,8 @@ def saludo_plantilla_variable(request): # Ejemplo de plantilla con variable
     ahora = datetime.now()
     lista = ["Plantillas", "Modelos", "Formularios", "Vistas", "Despliegue"]
 
-    doc_externo = open("C:/Users/jaime/OneDrive/Documentos/ProyectosDjango/ProyectoDjango/ProyectoDjango/plantillas/plantilla_variable.html")
-
-    plt = Template(doc_externo.read())
-
-    doc_externo.close()
-
-    ctx = Context({"nombre_persona" : p1.nombre, "apellido_persona": p1.apellido, "momento_actual": ahora, "temas": lista})
-
-    respuesta = plt.render(ctx)
+# Es una forma de optimizar las cargas. Importando el loader y modificando DIRS (settings)
+    doc_externo = get_template('plantilla_variable.html')
+    respuesta = doc_externo.render({"nombre_persona" : p1.nombre, "apellido_persona": p1.apellido, "momento_actual": ahora, "temas": lista})
 
     return HttpResponse(respuesta)
