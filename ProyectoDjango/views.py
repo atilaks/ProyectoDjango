@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context
 from django.template.loader import get_template
+from django.shortcuts import render
 
 class Persona(object):
     def __init__(self, nombre, apellido):
@@ -72,3 +73,19 @@ def saludo_plantilla_variable(request): # Ejemplo de plantilla con variable
     respuesta = doc_externo.render({"nombre_persona" : p1.nombre, "apellido_persona": p1.apellido, "momento_actual": ahora, "temas": lista})
 
     return HttpResponse(respuesta)
+
+def saludo_metodo_render(request): # Ejemplo de importacion de plantilla con render
+    p1 = Persona("J", "Franco")
+    ahora = datetime.now()
+    lista = ["Plantillas", "Modelos", "Formularios", "Vistas", "Despliegue"]
+
+    return render(request, 'plantilla_variable.html', {"nombre_persona" : p1.nombre, "apellido_persona": p1.apellido, "momento_actual": ahora, "temas": lista})
+
+def plantilla_incrustada(request): # Ejemplo de plantilla incrustada
+    return render(request, 'plantilla_base.html')
+
+def herencia_plantillas_hija1(request): # Ejemplo de plantilla con herencia
+    return render(request, 'herencia/hija1.html')
+
+def herencia_plantillas_hija2(request): # Ejemplo de plantilla con herencia
+    return render(request, 'herencia/hija2.html')

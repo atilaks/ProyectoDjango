@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ProyectoDjango.views import despedida, saludo_plantilla_base, saludo_plantilla_variable, despedida, dame_fecha, calcula_edad
+from ProyectoDjango.views import despedida, saludo_plantilla_base, saludo_plantilla_variable, saludo_metodo_render, despedida, dame_fecha, calcula_edad, plantilla_incrustada, herencia_plantillas_hija1, herencia_plantillas_hija2
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo1/', saludo_plantilla_base),
     path('saludo2/', saludo_plantilla_variable),
+    path('saludo3/', saludo_metodo_render),
     path('nosveremos/', despedida),
     path('fecha/', dame_fecha),
-    path('edades/<int:edad>/<int:agno>', calcula_edad)
+    path('edades/<int:edad>/<int:agno>', calcula_edad),
+    path('incrustada/', plantilla_incrustada),
+    path('herencia1/', herencia_plantillas_hija1),
+    path('herencia2/', herencia_plantillas_hija2)
 ]
